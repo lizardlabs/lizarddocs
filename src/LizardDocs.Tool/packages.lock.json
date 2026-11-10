@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "AngleSharp": {
+        "type": "Transitive",
+        "resolved": "1.8.6",
+        "contentHash": "tdvrWSsHz8iRcb8U2cbFtYF6/1Mvhbe5ZxN/VdhVeIfp5vOvbwz3Bn7OZknnm2QSyGvM9ZaZLNLvfanPzNa61Q=="
+      },
+      "Markdig": {
+        "type": "Transitive",
+        "resolved": "0.37.0",
+        "contentHash": "biiu4MTPFjW55qw6v5Aphtj0MjDLJ14x8ndZwkJUHIeqvaSGKeqhLY7S7Vu/S3k7/c9KwhhnaCDP9hdFNUhcNA=="
+      },
+      "YamlDotNet": {
+        "type": "Transitive",
+        "resolved": "16.3.0",
+        "contentHash": "SgMOdxbz8X65z8hraIs6hOEdnkH6hESTAIUa7viEngHOYaH+6q5XJmwr1+yb9vJpNQ19hCQY69xbFsLtXpobQA=="
+      },
+      "LizardLabs.LizardDocs.Core": {
+        "type": "Project",
+        "dependencies": {
+          "AngleSharp": "[1.8.6, )",
+          "Markdig": "[0.37.0, )",
+          "YamlDotNet": "[16.3.0, )"
+        }
+      }
+    }
+  }
+}

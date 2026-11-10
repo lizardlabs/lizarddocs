@@ -1,0 +1,25 @@
+site_name: LizardDocs
+site_description: A .NET static documentation builder for Markdown, with local search, configurable branding and uploadable ZIP packages.
+site_url: ''
+brand_mark: LD
+brand_label: Docs
+sidebar_note: Markdown documentation, published as static HTML.
+tagline: Markdown in. Static documentation out.
+theme_color: '#0f766e'
+docs_dir: docs
+site_dir: site
+home_cards:
+  - title: Get started
+    description: Build your first documentation site.
+    page: guide/getting-started.md
+  - title: Brand your site
+    description: Set names, logos, colours and links.
+    page: configuration.md
+nav:
+  - Start:
+      - Overview: index.md
+      - Getting started: guide/getting-started.md
+  - Reference:
+      - Configuration: configuration.md
+      - Commands: commands.md
+      - Hosting and ZIP files: hosting.md

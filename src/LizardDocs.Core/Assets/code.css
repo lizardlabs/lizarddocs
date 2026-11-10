@@ -1,0 +1,26 @@
+:root { --cs-accent: #2c6b58; }
+body { font-size: 1rem; line-height: 1.65; }
+h1, h2, h3 { line-height: 1.2; }
+h1 { font-weight: 650; }
+pre { position: relative; border-left: 3px solid var(--cs-accent); padding-top: 2rem; }
+pre code { white-space: pre; font-size: .87rem; line-height: 1.55; }
+.cs-copy { position: absolute; right: .5rem; top: .35rem; font-size: .75rem; border: 1px solid #999; border-radius: .25rem; background: transparent; color: inherit; }
+.cs-keyword { color: #7552a3; font-weight: 600; }
+.cs-string { color: #217452; }
+.cs-comment { color: #747b83; font-style: italic; }
+.cs-number { color: #a15423; }
+[data-bs-theme="dark"] .cs-keyword { color: #c2a3e4; }
+[data-bs-theme="dark"] .cs-string { color: #8dd7a7; }
+[data-bs-theme="dark"] .cs-number { color: #ecc39b; }
+table { font-size: .94rem; }
+.chapter-links { display: flex; justify-content: space-between; margin-top: 2rem; border-top: 1px solid #999; padding-top: 1rem; }
+.cs-comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.cs-comparison-controls { grid-column: 1 / -1; }
+.cs-comparison-controls label { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; font-weight: 600; }
+.cs-comparison-controls select { max-width: 100%; padding: .35rem; color: inherit; background: var(--bs-body-bg, white); border: 1px solid #999; border-radius: .25rem; }
+.cs-comparison-panel { min-width: 0; padding: .75rem; border: 1px solid #999; border-radius: .35rem; }
+.cs-comparison-panel[hidden] { display: none; }
+.cs-comparison-panel h2 { margin-top: 0; font-size: 1.25rem; }
+.cs-comparison-panel pre { overflow-x: auto; }
+@media (max-width: 1000px) { .cs-comparison-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 767px) { body { font-size: .96rem; } pre { overflow-x: auto; } }

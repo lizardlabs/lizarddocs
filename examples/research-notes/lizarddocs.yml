@@ -1,0 +1,12 @@
+site_name: Research Notes
+site_description: Data preparation, analysis and reproducible observations.
+brand_mark: RN
+brand_label: Notebook
+theme_color: '#6d3ca0'
+tagline: From observations to explanations.
+sidebar_note: Data analysis notes and decisions.
+docs_dir: docs
+site_dir: site
+nav:
+  - Overview: index.md
+  - Analysis: analysis.md

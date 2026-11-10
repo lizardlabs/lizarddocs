@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><PackAsTool>true</PackAsTool>
+    <ToolCommandName>lizarddocs</ToolCommandName><PackageId>LizardLabs.LizardDocs</PackageId>
+    <Description>A .NET static documentation site builder. Markdown in, searchable HTML and uploadable ZIP out.</Description>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../LizardDocs.Core/LizardDocs.Core.csproj" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../THIRD_PARTY_NOTICES.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

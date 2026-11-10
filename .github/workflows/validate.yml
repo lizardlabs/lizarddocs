@@ -1,0 +1,18 @@
+name: Validate LizardDocs
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore tests/LizardDocs.Tests --locked-mode
+      - run: dotnet run --no-restore --project tests/LizardDocs.Tests
+      - run: dotnet run --no-restore --project src/LizardDocs.Tool -- package
+      - run: dotnet pack src/LizardDocs.Core -c Release -o artifacts/packages
+      - run: dotnet pack src/LizardDocs.Tool -c Release -o artifacts/packages

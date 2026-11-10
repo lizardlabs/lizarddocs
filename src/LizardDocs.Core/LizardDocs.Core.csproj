@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><PackageId>LizardLabs.LizardDocs.Core</PackageId><Description>Reusable .NET Markdown-to-static-site engine with offline search, navigation and ZIP packaging.</Description></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.37.0" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+    <PackageReference Include="AngleSharp" Version="1.8.6" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <EmbeddedResource Include="Assets/*" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../THIRD_PARTY_NOTICES.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

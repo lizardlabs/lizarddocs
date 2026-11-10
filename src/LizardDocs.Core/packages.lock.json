@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "AngleSharp": {
+        "type": "Direct",
+        "requested": "[1.8.6, )",
+        "resolved": "1.8.6",
+        "contentHash": "tdvrWSsHz8iRcb8U2cbFtYF6/1Mvhbe5ZxN/VdhVeIfp5vOvbwz3Bn7OZknnm2QSyGvM9ZaZLNLvfanPzNa61Q=="
+      },
+      "Markdig": {
+        "type": "Direct",
+        "requested": "[0.37.0, )",
+        "resolved": "0.37.0",
+        "contentHash": "biiu4MTPFjW55qw6v5Aphtj0MjDLJ14x8ndZwkJUHIeqvaSGKeqhLY7S7Vu/S3k7/c9KwhhnaCDP9hdFNUhcNA=="
+      },
+      "YamlDotNet": {
+        "type": "Direct",
+        "requested": "[16.3.0, )",
+        "resolved": "16.3.0",
+        "contentHash": "SgMOdxbz8X65z8hraIs6hOEdnkH6hESTAIUa7viEngHOYaH+6q5XJmwr1+yb9vJpNQ19hCQY69xbFsLtXpobQA=="
+      }
+    }
+  }
+}
