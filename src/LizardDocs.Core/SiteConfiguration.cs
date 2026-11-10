@@ -5,6 +5,7 @@ namespace LizardDocs;
 public sealed record NavigationItem(string Title, string? Source, IReadOnlyList<NavigationItem> Children);
 public sealed record FooterLink(string Title, string Url);
 public sealed record HomeCard(string Title, string Description, string Page);
+public sealed record CookieConsentOptions(bool Enabled, string PrivacyUrl, string PopupColor, string ButtonColor);
 
 public sealed record SiteConfiguration(string Title, string Description, string Output, IReadOnlyList<NavigationItem> Navigation,
     IReadOnlyList<string> Styles, IReadOnlyList<string> Scripts, string RepositoryUrl, string EditUri)
@@ -21,6 +22,12 @@ public sealed record SiteConfiguration(string Title, string Description, string 
     public string Language { get; init; } = "en";
     public string LegacyMarker { get; init; } = "";
     public string LegacyGenerator { get; init; } = "";
+    public bool ExternalLinksNewTab { get; init; }
+    public bool ShowSourceLink { get; init; } = true;
+    public bool ThemeSwitcher { get; init; } = true;
+    public string Favicon { get; init; } = "";
+    public string GoogleAnalyticsId { get; init; } = "";
+    public CookieConsentOptions CookieConsent { get; init; } = new(false, "", "#0f766e", "#102144");
     public IReadOnlyList<HomeCard> HomeCards { get; init; } = [];
     public string SourcePath(string root)
     {
@@ -52,6 +59,8 @@ public sealed record SiteConfiguration(string Title, string Description, string 
             throw new InvalidDataException("Expected one documentation configuration mapping");
         string Scalar(string name, string? fallback = null) => mapping.Children.TryGetValue(new YamlScalarNode(name), out var node) && node is YamlScalarNode scalar
             ? scalar.Value ?? throw new InvalidDataException("Missing value: " + name) : fallback ?? throw new InvalidDataException("Missing configuration: " + name);
+        bool Boolean(string name, bool fallback) => !mapping.Children.ContainsKey(new YamlScalarNode(name)) ? fallback
+            : bool.TryParse(Scalar(name), out var value) ? value : throw new InvalidDataException(name + " must be true or false");
         string[] List(string name)
         {
             if (!mapping.Children.TryGetValue(new YamlScalarNode(name), out var node)) return [];
@@ -84,6 +93,27 @@ public sealed record SiteConfiguration(string Title, string Description, string 
         var color = Scalar("theme_color", "#0f766e");
         if (!System.Text.RegularExpressions.Regex.IsMatch(color, @"\A#[0-9a-fA-F]{6}\z")) throw new InvalidDataException("theme_color must be #RRGGBB");
         var logo = Scalar("logo", "");
+        var favicon = Scalar("favicon", "");
+        if (favicon.Length > 0) SitePaths.ValidateRelative(favicon);
+        var analytics = Scalar("google_analytics_id", "");
+        if (analytics.Length > 0 && !System.Text.RegularExpressions.Regex.IsMatch(analytics, @"\AG-[A-Z0-9]+\z"))
+            throw new InvalidDataException("google_analytics_id must be empty or a GA4 G- measurement ID");
+        var consent = new CookieConsentOptions(false, "", "#0f766e", "#102144");
+        if (mapping.Children.TryGetValue(new YamlScalarNode("cookie_consent"), out var consentNode))
+        {
+            if (consentNode is not YamlMappingNode consentMap) throw new InvalidDataException("cookie_consent must be a mapping");
+            string Field(string name, string fallback) => !consentMap.Children.TryGetValue(new YamlScalarNode(name), out var node) ? fallback
+                : node is YamlScalarNode { Value: { } text } ? text : throw new InvalidDataException("Invalid cookie_consent field: " + name);
+            if (!bool.TryParse(Field("enabled", "false"), out var enabled)) throw new InvalidDataException("cookie_consent.enabled must be true or false");
+            var privacy = Field("privacy_url", "");
+            if ((enabled || privacy.Length > 0) && (!Uri.TryCreate(privacy, UriKind.Absolute, out var policy) || policy.Scheme is not ("http" or "https") || policy.UserInfo.Length > 0))
+                throw new InvalidDataException("cookie_consent.privacy_url must be an absolute HTTP(S) URL without credentials");
+            var popup = Field("popup_color", "#0f766e"); var button = Field("button_color", "#102144");
+            if (new[] { popup, button }.Any(value => !System.Text.RegularExpressions.Regex.IsMatch(value, @"\A#[0-9a-fA-F]{6}\z")))
+                throw new InvalidDataException("Cookie consent colours must be #RRGGBB");
+            consent = new(enabled, privacy, popup, button);
+        }
+        if (analytics.Length > 0 && !consent.Enabled) throw new InvalidDataException("Google Analytics requires enabled cookie consent");
         if (logo.Length > 0)
         {
             if (Uri.TryCreate(logo, UriKind.Absolute, out var image))
@@ -112,7 +142,9 @@ public sealed record SiteConfiguration(string Title, string Description, string 
             SiteUrl = SiteMetadata.NormalizeUrl(Scalar("site_url", "")), FooterLinks = footer, SourceDirectory = docsDirectory,
             BrandMark = Scalar("brand_mark", title[..1]), BrandLabel = Scalar("brand_label", "Docs"), Tagline = Scalar("tagline", ""),
             SidebarNote = Scalar("sidebar_note", ""), Logo = logo, ThemeColor = color, RepositoryLabel = Scalar("repository_label", "Repository"),
-            Language = Scalar("language", "en"), HomeCards = cards, LegacyMarker = legacyMarker, LegacyGenerator = legacyGenerator
+            Language = Scalar("language", "en"), HomeCards = cards, LegacyMarker = legacyMarker, LegacyGenerator = legacyGenerator,
+            ExternalLinksNewTab = Boolean("external_links_new_tab", false), ShowSourceLink = Boolean("show_source_link", true),
+            ThemeSwitcher = Boolean("theme_switcher", true), Favicon = favicon, GoogleAnalyticsId = analytics, CookieConsent = consent
         };
     }
     private static NavigationItem[] ParseNavigation(YamlNode node)

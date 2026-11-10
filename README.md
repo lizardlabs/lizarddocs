@@ -50,6 +50,9 @@ Put the pages under `docs/`, add them to navigation, and rebuild. A topic such a
   direct section links. Literal operators such as `??` are searchable too.
 - Code-copy controls and deliberately minimal, non-semantic highlighting.
 - A responsive local theme with dark mode, optional logos and custom CSS/scripts.
+- A discreet system/light/dark switch, an optional favicon, configurable footer
+  and source links, and an option to open external links in new tabs.
+- Optional Cookie Consent integration and GA4 analytics loaded only after consent.
 - Canonical URLs, descriptions, social metadata, sitemap and robots output.
 - Source/link/asset validation, output guards, atomic replacement and deterministic
   ZIP packaging. Failed validation preserves previous output.
@@ -63,7 +66,7 @@ Source builds use the .NET 8 SDK selected in `global.json`:
 dotnet restore tests/LizardDocs.Tests --locked-mode
 dotnet run --no-restore --project tests/LizardDocs.Tests
 dotnet pack src/LizardDocs.Tool -c Release -o artifacts/packages
-dotnet tool install LizardLabs.LizardDocs --version 0.1.0 --tool-path artifacts/tools --add-source artifacts/packages
+dotnet tool install LizardLabs.LizardDocs --version 0.1.1 --tool-path artifacts/tools --add-source artifacts/packages
 ```
 
 Invoke `artifacts/tools/lizarddocs` (`lizarddocs.exe` on Windows), or add that

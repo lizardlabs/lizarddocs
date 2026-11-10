@@ -20,6 +20,7 @@ internal static class SiteLayout
         bool home = source == "index.md";
         var output = new StringBuilder($"<!doctype html><html lang=\"{E(config.Language)}\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"generator\" content=\"LizardDocs\">");
         output.Append(SiteMetadata.Head(config, source, title, document));
+        output.Append(SiteEnhancements.Head(config, htmlPath));
         output.Append($"<meta name=\"theme-color\" content=\"{E(config.ThemeColor)}\">");
         foreach (var style in config.Styles) output.Append($"<link rel=\"stylesheet\" href=\"{Url(style)}\">");
         output.Append($"<style>:root{{--site-accent:{config.ThemeColor};--cs-accent:{config.ThemeColor};}}</style>");
@@ -29,6 +30,7 @@ internal static class SiteLayout
             if (First(item) is { } target)
                 output.Append($"<a href=\"{Url(SitePaths.Html(target))}\"{(source is not null && Contains(item) ? " class=\"is-active\"" : "")}>{E(item.Title)}</a>");
         output.Append("</nav>");
+        if (config.ThemeSwitcher) output.Append("<button class=\"theme-switcher\" type=\"button\" aria-label=\"Colour theme: system. Change colour theme\" title=\"Colour theme: system\" hidden><span aria-hidden=\"true\">◐</span></button>");
         if (config.RepositoryUrl.Length > 0) output.Append($"<a class=\"site-repository\" href=\"{E(config.RepositoryUrl)}\">{E(config.RepositoryLabel)} <span aria-hidden=\"true\">↗</span></a>");
         output.Append("</div></header>");
 
@@ -87,7 +89,7 @@ internal static class SiteLayout
         if (index > 0) output.Append($"<a rel=\"prev\" href=\"{Url(SitePaths.Html(pages[index - 1].Source!))}\"><span>Previous</span><strong>← {E(pages[index - 1].Title)}</strong></a>");
         if (index >= 0 && index + 1 < pages.Length) output.Append($"<a rel=\"next\" href=\"{Url(SitePaths.Html(pages[index + 1].Source!))}\"><span>Next</span><strong>{E(pages[index + 1].Title)} →</strong></a>");
         output.Append($"</nav><footer class=\"page-footer\"><span>{E(config.Title)}{(config.Tagline.Length > 0 ? " · " + E(config.Tagline) : "")}</span>");
-        if (source is not null && config.RepositoryUrl.Length > 0 && config.EditUri.Length > 0)
+        if (config.ShowSourceLink && source is not null && config.RepositoryUrl.Length > 0 && config.EditUri.Length > 0)
         {
             var viewPath = config.EditUri.StartsWith("edit/", StringComparison.Ordinal) ? "blob/" + config.EditUri[5..] : config.EditUri;
             SitePaths.ValidateRelative(viewPath.TrimEnd('/'));
@@ -105,6 +107,6 @@ internal static class SiteLayout
             output.Append("</nav></div></footer>");
         }
         foreach (var script in config.Scripts) output.Append($"<script src=\"{Url(script)}\" defer></script>");
-        return output.Append("</body></html>\n").ToString();
+        return SiteEnhancements.ExternalLinks(config, output.Append("</body></html>\n").ToString());
     }
 }

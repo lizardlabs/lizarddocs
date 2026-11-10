@@ -60,6 +60,7 @@ public static class SiteBuilder
             }
             foreach (var asset in config.Styles.Concat(config.Scripts).Where(asset => !ThemeAssets.IsBuiltIn(asset))) CopyLinkedAsset(docs, stage, "index.md", asset);
             if (config.Logo.Length > 0) CopyLinkedAsset(docs, stage, "index.md", config.Logo);
+            if (config.Favicon.Length > 0) CopyLinkedAsset(docs, stage, "index.md", config.Favicon);
             ThemeAssets.Write(stage);
             var searchJson = JsonSerializer.Serialize(new { docs = search });
             Write(stage, SiteSearch.JsonPath, searchJson);

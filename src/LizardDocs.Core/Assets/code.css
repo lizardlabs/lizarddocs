@@ -5,13 +5,10 @@ h1 { font-weight: 650; }
 pre { position: relative; border-left: 3px solid var(--cs-accent); padding-top: 2rem; }
 pre code { white-space: pre; font-size: .87rem; line-height: 1.55; }
 .cs-copy { position: absolute; right: .5rem; top: .35rem; font-size: .75rem; border: 1px solid #999; border-radius: .25rem; background: transparent; color: inherit; }
-.cs-keyword { color: #7552a3; font-weight: 600; }
-.cs-string { color: #217452; }
-.cs-comment { color: #747b83; font-style: italic; }
-.cs-number { color: #a15423; }
-[data-bs-theme="dark"] .cs-keyword { color: #c2a3e4; }
-[data-bs-theme="dark"] .cs-string { color: #8dd7a7; }
-[data-bs-theme="dark"] .cs-number { color: #ecc39b; }
+.cs-keyword { color: var(--code-keyword, #0000ff); font-weight: 600; }
+.cs-string { color: var(--code-string, #a31515); }
+.cs-comment { color: var(--code-comment, #008000); font-style: italic; }
+.cs-number { color: var(--code-number, #075f36); }
 table { font-size: .94rem; }
 .chapter-links { display: flex; justify-content: space-between; margin-top: 2rem; border-top: 1px solid #999; padding-top: 1rem; }
 .cs-comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0; }

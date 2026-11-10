@@ -43,7 +43,7 @@ public static class DocumentationChecks
                 else if (fragment.Length > 0 && pages.TryGetValue(destination, out var linked) && !linked.Anchors.Contains(fragment)) errors.Add($"{label}: missing anchor: {target}");
             }
         }
-        foreach (var asset in config.Styles.Concat(config.Scripts).Where(asset => !ThemeAssets.IsBuiltIn(asset)).Concat(config.Logo.Length > 0 && !Uri.TryCreate(config.Logo, UriKind.Absolute, out _) ? new[] { config.Logo } : []))
+        foreach (var asset in config.Styles.Concat(config.Scripts).Where(asset => !ThemeAssets.IsBuiltIn(asset)).Concat(config.Logo.Length > 0 && !Uri.TryCreate(config.Logo, UriKind.Absolute, out _) ? new[] { config.Logo } : []).Concat(config.Favicon.Length > 0 ? new[] { config.Favicon } : []))
         {
             var path = Data.Resolve(Path.Combine(docs, asset));
             if (!Data.Within(docs, path) || !File.Exists(path)) errors.Add("Configured asset missing or outside source: " + asset);

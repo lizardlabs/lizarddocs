@@ -3,7 +3,7 @@ namespace LizardDocs;
 public static class ThemeAssets
 {
     public const string DirectoryName = "assets/lizarddocs";
-    public static IReadOnlyList<string> Files { get; } = new[] { "site.css", "code.css", "site.js", "search.js" };
+    public static IReadOnlyList<string> Files { get; } = new[] { "site.css", "code.css", "site.js", "search.js", "theme.js", "integrations.js" };
     public static bool IsBuiltIn(string path) => Files.Any(file => path == DirectoryName + "/" + file);
     public static string Read(string file)
     {

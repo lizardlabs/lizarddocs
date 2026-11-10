@@ -18,7 +18,7 @@ From the LizardDocs repository:
 
 ```sh
 dotnet pack src/LizardDocs.Tool -c Release -o artifacts/packages
-dotnet tool install LizardLabs.LizardDocs --version 0.1.0 --tool-path artifacts/tools --add-source artifacts/packages
+dotnet tool install LizardLabs.LizardDocs --version 0.1.1 --tool-path artifacts/tools --add-source artifacts/packages
 ```
 
 The tool executable is artifacts/tools/lizarddocs (lizarddocs.exe on Windows). Add that directory to PATH or invoke it directly. A public NuGet publication is not required for a local installation.

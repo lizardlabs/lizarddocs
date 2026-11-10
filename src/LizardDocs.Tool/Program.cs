@@ -13,7 +13,7 @@ public static class Program
                 Console.WriteLine("LizardDocs: Markdown to static HTML with .NET.\n\nCommands: new PATH [--name NAME], check, build, package, site-check, serve\nOptions: --root PATH, --output PATH, --archive PATH, --site-url URL, --port NUMBER\nRun commands beside lizarddocs.yml or supply --root. Named HTML pages, local search and ZIP output are included.");
                 return 0;
             }
-            if (args[0] == "--version") { Console.WriteLine("LizardDocs 0.1.0"); return 0; }
+            if (args[0] == "--version") { Console.WriteLine("LizardDocs " + typeof(Program).Assembly.GetName().Version!.ToString(3)); return 0; }
             if (args[0] == "new")
             {
                 if (args.Length is not (2 or 4) || (args.Length == 4 && args[2] != "--name")) throw new ArgumentException("Expected: lizarddocs new PATH [--name NAME]");
