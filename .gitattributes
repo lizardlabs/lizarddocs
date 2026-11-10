@@ -1,0 +1,2 @@
+# Preserve the license texts exactly as distributed by their upstream owners.
+third-party/*.LICENSE.txt -whitespace
