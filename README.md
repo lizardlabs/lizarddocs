@@ -7,6 +7,9 @@ ranked search, readable code examples and an uploadable ZIP. Give each project i
 own name, logo, colours, navigation and footer. No Python, Node, CSS build chain,
 CDN or server-side .NET process is needed to host the output.
 
+Created by [Lizard Labs Software](https://lizard-labs.com/).
+See a generated site: [DirectSharp documentation](https://direct-sharp.lizard-labs.com/).
+
 ## A small site
 
 Create a documentation project with the CLI:
