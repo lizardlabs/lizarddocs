@@ -16,6 +16,7 @@ public static class SiteInitializer
         try
         {
             Directory.CreateDirectory(Path.Combine(stage, "docs/guide"));
+            File.WriteAllText(Path.Combine(stage, ".gitignore"), "/site/\n/artifacts/\nlizarddocs.deploy.yml\n");
             File.WriteAllText(Path.Combine(stage, "lizarddocs.yml"), $"site_name: {JsonSerializer.Serialize(name)}\nsite_description: {JsonSerializer.Serialize("Documentation for " + name)}\nbrand_label: Docs\ntheme_color: '#0f766e'\ndocs_dir: docs\nsite_dir: site\nnav:\n  - Start:\n      - Overview: index.md\n      - Getting started: guide/getting-started.md\n");
             File.WriteAllText(Path.Combine(stage, "docs/index.md"), $"# {System.Net.WebUtility.HtmlEncode(name)}\n\nClear documentation, written in Markdown and published as ordinary HTML.\n\n## Start reading\n\n[Follow the guide](guide/getting-started.md).\n");
             File.WriteAllText(Path.Combine(stage, "docs/guide/getting-started.md"), "# Getting started\n\nEdit these Markdown files and rebuild whenever the documentation changes.\n\n## A small example\n\n```csharp\nConsole.WriteLine(\"Hello from your documentation\");\n```\n\n## Next steps\n\nAdd a page under docs/, then add its path to nav in lizarddocs.yml. Search, navigation and on-page contents are generated automatically.\n\n[Back to the overview](../index.md).\n");

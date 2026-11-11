@@ -19,6 +19,7 @@ try
 {
     SearchTests.Run(temporary, Test);
     PresentationTests.Run(temporary, Test);
+    DeploymentTests.Run(temporary, Test);
     Test("new creates a standalone project and protects existing content", () => {
         Pass(SiteInitializer.Create(project, "Atlas: API & Docs")); Pass(DocumentationChecks.Check(project));
         var config = File.ReadAllText(Path.Combine(project, "lizarddocs.yml"));

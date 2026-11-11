@@ -5,3 +5,4 @@
 **/site/
 .vs/
 .idea/
+**/lizarddocs.deploy.yml

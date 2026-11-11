@@ -21,6 +21,11 @@
         "resolved": "1.8.6",
         "contentHash": "tdvrWSsHz8iRcb8U2cbFtYF6/1Mvhbe5ZxN/VdhVeIfp5vOvbwz3Bn7OZknnm2QSyGvM9ZaZLNLvfanPzNa61Q=="
       },
+      "FluentFTP": {
+        "type": "Transitive",
+        "resolved": "55.1.0",
+        "contentHash": "RXA6WEaziJiSt/lrOxbpxfkOyTY1YaeQiCKzsVoQQxEwcoI0dtoTzGiqS47mrqq3zBuETMwaVjI7FLTCcJC80w=="
+      },
       "Markdig": {
         "type": "Transitive",
         "resolved": "0.37.0",
@@ -34,13 +39,14 @@
       "LizardLabs.LizardDocs": {
         "type": "Project",
         "dependencies": {
-          "LizardLabs.LizardDocs.Core": "[0.1.0, )"
+          "LizardLabs.LizardDocs.Core": "[0.1.1, )"
         }
       },
       "LizardLabs.LizardDocs.Core": {
         "type": "Project",
         "dependencies": {
           "AngleSharp": "[1.8.6, )",
+          "FluentFTP": "[55.1.0, )",
           "Markdig": "[0.37.0, )",
           "YamlDotNet": "[16.3.0, )"
         }

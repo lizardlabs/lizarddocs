@@ -57,6 +57,8 @@ Put the pages under `docs/`, add them to navigation, and rebuild. A topic such a
 - Source/link/asset validation, output guards, atomic replacement and deterministic
   ZIP packaging. Failed validation preserves previous output.
 - A loopback preview server for reviewing generated files over HTTP.
+- Explicit FTP/FTPS deployment with private settings, environment-based credentials
+  and a dry run. Builds remain local; FTPS is the deployment default.
 
 ## Build and install
 
@@ -66,7 +68,7 @@ Source builds use the .NET 8 SDK selected in `global.json`:
 dotnet restore tests/LizardDocs.Tests --locked-mode
 dotnet run --no-restore --project tests/LizardDocs.Tests
 dotnet pack src/LizardDocs.Tool -c Release -o artifacts/packages
-dotnet tool install LizardLabs.LizardDocs --version 0.1.1 --tool-path artifacts/tools --add-source artifacts/packages
+dotnet tool install LizardLabs.LizardDocs --version 0.2.0 --tool-path artifacts/tools --add-source artifacts/packages
 ```
 
 Invoke `artifacts/tools/lizarddocs` (`lizarddocs.exe` on Windows), or add that
@@ -77,7 +79,8 @@ followed by the same command.
 [Getting started](docs/guide/getting-started.md) ·
 [Configuration](docs/configuration.md) ·
 [Commands](docs/commands.md) ·
-[Hosting](docs/hosting.md)
+[Hosting](docs/hosting.md) ·
+[FTP/FTPS deployment](docs/deployment.md)
 
 ## Reuse it across projects
 
@@ -96,9 +99,10 @@ editorial restrictions are imposed on other sites.
 
 First-party code is [MIT licensed](LICENSE). Dependencies retain their own
 licenses; their full notices are preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-and `third-party/`. Runtime dependencies are Markdig, YamlDotNet and AngleSharp.
+and `third-party/`. Runtime dependencies are Markdig, YamlDotNet, AngleSharp and FluentFTP.
 Managed Jint tests execute the shipped search functions without Node; this does
 not claim full-browser visual, clipboard or accessibility verification.
 
 GitHub Actions runs only through `workflow_dispatch`. Building, packaging and
-previewing do not deploy a site or publish a package.
+previewing do not deploy a site or publish a package. Only the explicit `deploy`
+command uploads files to a configured destination.

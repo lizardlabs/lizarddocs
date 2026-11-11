@@ -6,7 +6,7 @@ LizardDocs generates static files. Your production host needs no .NET runtime or
 
 Run package, upload the ZIP, and extract its contents into the site's web directory. index.html and the topic folders belong directly in that directory. Keep assets/ and search/ with them.
 
-Configure index.html as the default document. Configure 404.html as your host's missing-page response with HTTP status 404. The generator does not change server configuration or deploy the files for you.
+Configure index.html as the default document. Configure 404.html as your host's missing-page response with HTTP status 404. The generator does not change server configuration. For direct upload instead of extracting a ZIP, configure [FTP/FTPS deployment](deployment.md) and run the explicit deploy command.
 
 ## Local browsing
 
